@@ -117,26 +117,61 @@ document.addEventListener('DOMContentLoaded', () => {
     const homeBtns = document.querySelectorAll('.home-btn');
     const pages = document.querySelectorAll('.full-page');
 
+    function showPage(pageId) {
+        terminalContainer.style.display = 'none';
+        pages.forEach(page => {
+            if (page.id === pageId) {
+                page.classList.remove('hidden');
+            } else {
+                page.classList.add('hidden');
+            }
+        });
+    }
+
+    function showTerminal() {
+        pages.forEach(page => page.classList.add('hidden'));
+        terminalContainer.style.display = 'block';
+    }
+
+    function handleHashChange() {
+        const hash = window.location.hash.substring(1); // Remove #
+        if (hash) {
+            const targetPageId = 'page-' + hash;
+            if (document.getElementById(targetPageId)) {
+                showPage(targetPageId);
+            } else {
+                showTerminal();
+            }
+        } else {
+            showTerminal();
+        }
+    }
+
     links.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('data-target');
-            const targetPage = document.getElementById(targetId);
-
-            if (targetPage) {
-                terminalContainer.style.display = 'none';
-                targetPage.classList.remove('hidden');
-            }
+            const hash = targetId.replace('page-', '');
+            history.pushState({
+                page: targetId
+            }, '', '#' + hash);
+            showPage(targetId);
         });
     });
 
     homeBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            pages.forEach(page => page.classList.add('hidden'));
-            terminalContainer.style.display = 'block'; // Or 'flex' depending on original CSS, but block is safer for div
-            // Restore flex if needed, but style.css says .terminal-container is block (default) or has width.
-            // Actually style.css doesn't specify display for terminal-container, so block is fine.
-            // Wait, body is flex, terminal-container is a child.
+            history.pushState({
+                page: 'terminal'
+            }, '', window.location.pathname);
+            showTerminal();
         });
     });
+
+    window.addEventListener('popstate', (event) => {
+        handleHashChange();
+    });
+
+    // Initial check
+    handleHashChange();
 });
