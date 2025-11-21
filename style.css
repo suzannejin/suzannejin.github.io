@@ -9,6 +9,7 @@
     --link-color: #4daafc;
     --link-hover: #8ac6fd;
     --cursor-color: #a0a0a0;
+    --btn-color: #f0f0f0;
 }
 
 [data-theme="light"] {
@@ -21,6 +22,7 @@
     --link-color: #0366d6;
     --link-hover: #58a6ff;
     --cursor-color: #555555;
+    --btn-color: #333333;
 }
 
 body {
@@ -38,6 +40,27 @@ body {
 
 [data-theme="dark"] body {
     background-color: #121212;
+}
+
+.theme-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    padding: 0;
+    width: 30px;
+    /* Fixed width for alignment */
+    text-align: center;
+    color: var(--btn-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 2000;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
 }
 
 .terminal-container {
@@ -81,7 +104,7 @@ body {
 
 .maximize {
     background-color: #27c93f;
-    cursor: pointer;
+    cursor: default;
 }
 
 .title {
@@ -181,8 +204,11 @@ body {
 
 .nav-menu {
     position: absolute;
-    top: 20px;
+    top: 70px;
     left: 20px;
+    width: 30px;
+    /* Match theme-btn width */
+    text-align: center;
 }
 
 .home-btn {

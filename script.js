@@ -1,16 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = themeToggleBtn.querySelector('i');
     const body = document.body;
     const html = document.documentElement;
 
     // Check for saved user preference, if any, on load of the website
     const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
 
+    function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        if (theme === 'dark') {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        } else {
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+    }
+
     if (currentTheme) {
-        html.setAttribute('data-theme', currentTheme);
+        setTheme(currentTheme);
     } else {
         // Default to dark
-        html.setAttribute('data-theme', 'dark');
+        setTheme('dark');
     }
 
     themeToggleBtn.addEventListener('click', () => {
@@ -20,8 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             theme = 'dark';
         }
-        html.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
+        setTheme(theme);
     });
 
     // Typing Animation
