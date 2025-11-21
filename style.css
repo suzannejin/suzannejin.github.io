@@ -3,7 +3,8 @@
     --text-color: #f0f0f0;
     --header-bg: #2d2d2d;
     --header-text: #c0c0c0;
-    --prompt-color: #76b900; /* Classic green or maybe a blue for zsh default */
+    --prompt-color: #76b900;
+    /* Classic green or maybe a blue for zsh default */
     --command-color: #f0f0f0;
     --link-color: #4daafc;
     --link-hover: #8ac6fd;
@@ -25,7 +26,8 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5; /* Outer background */
+    background-color: #f5f5f5;
+    /* Outer background */
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
     display: flex;
     justify-content: center;
@@ -54,7 +56,7 @@ body {
     display: flex;
     align-items: center;
     position: relative;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .buttons {
@@ -69,10 +71,16 @@ body {
     display: inline-block;
 }
 
-.close { background-color: #ff5f56; }
-.minimize { background-color: #ffbd2e; }
-.maximize { 
-    background-color: #27c93f; 
+.close {
+    background-color: #ff5f56;
+}
+
+.minimize {
+    background-color: #ffbd2e;
+}
+
+.maximize {
+    background-color: #27c93f;
     cursor: pointer;
 }
 
@@ -145,18 +153,25 @@ body {
     vertical-align: middle;
 }
 
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+.cursor.typing {
+    animation: none;
+    opacity: 1;
 }
 
-/* Typing effect for the intro */
-.typing-effect {
-    overflow: hidden; /* Ensures the content is not revealed until the animation */
-    white-space: nowrap; /* Keeps the content on a single line */
-    margin: 0;
-    /* animation: typing 3.5s steps(40, end); */ 
-    /* Simplified for now, just static text */
+.hidden {
+    display: none;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
 
 @media (max-width: 600px) {

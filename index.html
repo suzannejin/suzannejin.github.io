@@ -20,17 +20,19 @@
             <div class="title">sjin — -zsh — 80x24</div>
         </div>
         <div class="terminal-body">
-            <div class="command-line">
-                <span class="prompt">sjin@macbook ~ %</span> <span class="command">cat intro.txt</span>
+            <div class="command-line" id="line1">
+                <span class="prompt">sjin@macbook ~ %</span> <span class="command" id="cmd1"></span><span class="cursor"
+                    id="cursor1"></span>
             </div>
-            <div class="output">
-                <p class="typing-effect">Hi, I am Suzanne.</p>
+            <div class="output hidden" id="output1">
+                <p>Hi, I am Suzanne.</p>
             </div>
 
-            <div class="command-line">
-                <span class="prompt">sjin@macbook ~ %</span> <span class="command">ls -la links/</span>
+            <div class="command-line hidden" id="line2">
+                <span class="prompt">sjin@macbook ~ %</span> <span class="command" id="cmd2"></span><span class="cursor"
+                    id="cursor2"></span>
             </div>
-            <div class="output links-grid">
+            <div class="output links-grid hidden" id="output2">
                 <a href="https://github.com/suzannejin" target="_blank" class="link-item">
                     <i class="fab fa-github"></i> GitHub
                 </a>
@@ -46,8 +48,8 @@
                 </a>
             </div>
 
-            <div class="command-line">
-                <span class="prompt">sjin@macbook ~ %</span> <span class="cursor"></span>
+            <div class="command-line hidden" id="line3">
+                <span class="prompt">sjin@macbook ~ %</span> <span class="cursor" id="cursor3"></span>
             </div>
         </div>
     </div>
