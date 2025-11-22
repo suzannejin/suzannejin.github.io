@@ -61,52 +61,75 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function runSequence() {
-        // Initial delay
-        await new Promise(resolve => setTimeout(resolve, 500));
+        if (sessionStorage.getItem('terminalAnimationRun')) {
+            // Skip animation
+            cmd1.textContent = 'cat intro.txt';
+            cursor1.style.display = 'none';
+            output1.classList.remove('hidden');
 
-        // Type first command
-        cursor1.classList.add('typing');
-        await typeText(cmd1, 'cat intro.txt', 50);
-        cursor1.classList.remove('typing');
-        cursor1.style.display = 'none'; // Hide cursor after typing
+            line2.classList.remove('hidden');
+            cmd2.textContent = 'ls links/';
+            cursor2.style.display = 'none';
+            output2.classList.remove('hidden');
 
-        // Show output 1
-        await new Promise(resolve => setTimeout(resolve, 200));
-        output1.classList.remove('hidden');
+            line3.classList.remove('hidden');
+            cmd3.textContent = 'ls functions/';
+            cursor3.style.display = 'none';
+            output3.classList.remove('hidden');
 
-        // Show line 2
-        await new Promise(resolve => setTimeout(resolve, 200));
-        line2.classList.remove('hidden');
+            line4.classList.remove('hidden');
+        } else {
+            // Run animation
+            // Initial delay
+            await new Promise(resolve => setTimeout(resolve, 500));
 
-        // Type second command
-        await new Promise(resolve => setTimeout(resolve, 300));
-        cursor2.classList.add('typing');
-        await typeText(cmd2, 'ls links/', 50);
-        cursor2.classList.remove('typing');
-        cursor2.style.display = 'none';
+            // Type first command
+            cursor1.classList.add('typing');
+            await typeText(cmd1, 'cat intro.txt', 50);
+            cursor1.classList.remove('typing');
+            cursor1.style.display = 'none'; // Hide cursor after typing
 
-        // Show output 2
-        await new Promise(resolve => setTimeout(resolve, 200));
-        output2.classList.remove('hidden');
+            // Show output 1
+            await new Promise(resolve => setTimeout(resolve, 200));
+            output1.classList.remove('hidden');
 
-        // Show line 3
-        await new Promise(resolve => setTimeout(resolve, 200));
-        line3.classList.remove('hidden');
+            // Show line 2
+            await new Promise(resolve => setTimeout(resolve, 200));
+            line2.classList.remove('hidden');
 
-        // Type third command
-        await new Promise(resolve => setTimeout(resolve, 300));
-        cursor3.classList.add('typing');
-        await typeText(cmd3, 'ls functions/', 50);
-        cursor3.classList.remove('typing');
-        cursor3.style.display = 'none';
+            // Type second command
+            await new Promise(resolve => setTimeout(resolve, 300));
+            cursor2.classList.add('typing');
+            await typeText(cmd2, 'ls links/', 50);
+            cursor2.classList.remove('typing');
+            cursor2.style.display = 'none';
 
-        // Show output 3
-        await new Promise(resolve => setTimeout(resolve, 200));
-        output3.classList.remove('hidden');
+            // Show output 2
+            await new Promise(resolve => setTimeout(resolve, 200));
+            output2.classList.remove('hidden');
 
-        // Show line 4 (final prompt)
-        await new Promise(resolve => setTimeout(resolve, 200));
-        line4.classList.remove('hidden');
+            // Show line 3
+            await new Promise(resolve => setTimeout(resolve, 200));
+            line3.classList.remove('hidden');
+
+            // Type third command
+            await new Promise(resolve => setTimeout(resolve, 300));
+            cursor3.classList.add('typing');
+            await typeText(cmd3, 'ls functions/', 50);
+            cursor3.classList.remove('typing');
+            cursor3.style.display = 'none';
+
+            // Show output 3
+            await new Promise(resolve => setTimeout(resolve, 200));
+            output3.classList.remove('hidden');
+
+            // Show line 4 (final prompt)
+            await new Promise(resolve => setTimeout(resolve, 200));
+            line4.classList.remove('hidden');
+
+            // Set flag
+            sessionStorage.setItem('terminalAnimationRun', 'true');
+        }
     }
 
     runSequence();
