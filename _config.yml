@@ -18,6 +18,10 @@ collections:
     permalink: /projects/:path/
 
 markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
 theme: jekyll-theme-primer # Optional, but good for defaults if needed, though we are using custom layout
 plugins:
   - jekyll-feed
