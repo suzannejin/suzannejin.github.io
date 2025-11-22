@@ -286,3 +286,40 @@ body {
         height: 90vh;
     }
 }
+/* Blog Styles */
+.blog-year {
+    font-size: 1.5rem;
+    color: var(--link-color);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--header-bg);
+    padding-bottom: 5px;
+}
+
+.blog-item-compact {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.blog-date {
+    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+    color: var(--header-text);
+    min-width: 80px;
+    text-align: right;
+}
+
+.blog-title {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.blog-title:hover {
+    color: var(--link-color);
+    text-decoration: underline;
+}

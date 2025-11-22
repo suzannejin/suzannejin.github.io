@@ -1,0 +1,325 @@
+:root {
+    --bg-color: #1e1e1e;
+    --text-color: #f0f0f0;
+    --header-bg: #2d2d2d;
+    --header-text: #c0c0c0;
+    --prompt-color: #76b900;
+    /* Classic green or maybe a blue for zsh default */
+    --command-color: #f0f0f0;
+    --link-color: #4daafc;
+    --link-hover: #8ac6fd;
+    --cursor-color: #a0a0a0;
+    --btn-color: #f0f0f0;
+    --overlay-bg: rgba(30, 30, 30, 0.95);
+}
+
+[data-theme="light"] {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --header-bg: #e0e0e0;
+    --header-text: #555555;
+    --prompt-color: #005cc5;
+    --command-color: #333333;
+    --link-color: #0366d6;
+    --link-hover: #58a6ff;
+    --cursor-color: #555555;
+    --btn-color: #333333;
+    --overlay-bg: rgba(255, 255, 255, 0.95);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    /* Outer background */
+    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.3s;
+}
+
+[data-theme="dark"] body {
+    background-color: #121212;
+}
+
+.theme-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    padding: 0;
+    width: 30px;
+    /* Fixed width for alignment */
+    text-align: center;
+    color: var(--btn-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 2000;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
+}
+
+.terminal-container {
+    width: 800px;
+    max-width: 90%;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.terminal-header {
+    background-color: var(--header-bg);
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.buttons span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.close {
+    background-color: #ff5f56;
+}
+
+.minimize {
+    background-color: #ffbd2e;
+}
+
+.maximize {
+    background-color: #27c93f;
+    cursor: default;
+}
+
+.title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--header-text);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.terminal-body {
+    padding: 20px;
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.5;
+    min-height: 400px;
+}
+
+.command-line {
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.prompt {
+    color: var(--prompt-color);
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.command {
+    color: var(--command-color);
+}
+
+.output {
+    margin-bottom: 20px;
+    padding-left: 0;
+}
+
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.link-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.2s;
+    cursor: pointer;
+}
+
+.link-item:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+.cursor {
+    display: inline-block;
+    width: 10px;
+    height: 18px;
+    background-color: var(--cursor-color);
+    animation: blink 1s infinite;
+    vertical-align: middle;
+}
+
+.cursor.typing {
+    animation: none;
+    opacity: 1;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Full Page Styles */
+.full-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.nav-menu {
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    width: 30px;
+    /* Match theme-btn width */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.home-btn,
+.menu-btn {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.home-btn:hover,
+.menu-btn:hover {
+    color: var(--link-color);
+}
+
+.page-content {
+    margin-top: 60px;
+    text-align: center;
+}
+
+/* Menu Dropdown */
+.menu-container {
+    position: relative;
+}
+
+.menu-dropdown {
+    position: absolute;
+    top: 0;
+    left: 40px;
+    /* Position to the right of the button */
+    background-color: var(--bg-color);
+    border: 1px solid var(--header-bg);
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: max-content;
+    z-index: 2000;
+}
+
+.menu-link {
+    font-size: 1rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.2s;
+    text-align: left;
+}
+
+.menu-link:hover {
+    color: var(--link-color);
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .terminal-container {
+        width: 95%;
+        height: 90vh;
+    }
+}
+/* Blog Styles */
+.blog-year {
+    font-size: 1.5rem;
+    color: var(--link-color);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--header-bg);
+    padding-bottom: 5px;
+}
+
+.blog-item-compact {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.blog-date {
+    font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+    color: var(--header-text);
+    min-width: 80px;
+    text-align: right;
+}
+
+.blog-title {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.blog-title:hover {
+    color: var(--link-color);
+    text-decoration: underline;
+}

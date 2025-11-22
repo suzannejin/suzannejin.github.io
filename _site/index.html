@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suzanne Jin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+    <button id="theme-toggle" class="theme-btn" title="Toggle Theme">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="terminal-container">
+    <div class="terminal-header">
+        <div class="buttons">
+            <span class="close"></span>
+            <span class="minimize"></span>
+            <span class="maximize"></span>
+        </div>
+        <div class="title">sjin — -zsh — 80x24</div>
+    </div>
+    <div class="terminal-body">
+        <div class="command-line" id="line1">
+            <span class="prompt">sjin ~ %</span> <span class="command" id="cmd1"></span><span class="cursor"
+                id="cursor1"></span>
+        </div>
+        <div class="output hidden" id="output1">
+            <p>Hi, I am Suzanne 👋</p>
+        </div>
+
+        <div class="command-line hidden" id="line2">
+            <span class="prompt">sjin ~ %</span> <span class="command" id="cmd2"></span><span class="cursor"
+                id="cursor2"></span>
+        </div>
+        <div class="output links-grid hidden" id="output2">
+            <a href="https://github.com/suzannejin" target="_blank" class="link-item">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <a href="https://linkedin.com/in/suzannejin" target="_blank" class="link-item">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://scholar.google.com/citations?user=7hSkrvoAAAAJ&hl=en" target="_blank" class="link-item">
+                <i class="fas fa-graduation-cap"></i> Google Scholar
+            </a>
+            <a href="#" class="link-item">
+                <i class="fas fa-file-alt"></i> CV
+            </a>
+        </div>
+
+        <div class="command-line hidden" id="line3">
+            <span class="prompt">sjin ~ %</span> <span class="command" id="cmd3"></span><span class="cursor"
+                id="cursor3"></span>
+        </div>
+        <div class="output links-grid hidden" id="output3">
+            <a href="#" class="link-item" data-target="page-about">
+                <i class="fas fa-user"></i> About me
+            </a>
+            <a href="#" class="link-item" data-target="page-projects">
+                <i class="fas fa-code"></i> Projects
+            </a>
+            <a href="#" class="link-item" data-target="page-blog">
+                <i class="fas fa-pen-nib"></i> Blog
+            </a>
+            <a href="#" class="link-item" data-target="page-contact">
+                <i class="fas fa-envelope"></i> Contact me
+            </a>
+        </div>
+
+        <div class="command-line hidden" id="line4">
+            <span class="prompt">sjin ~ %</span> <span class="cursor" id="cursor4"></span>
+        </div>
+    </div>
+</div>
+
+<div id="page-about" class="full-page hidden">
+    <div class="nav-menu">
+    <i class="fas fa-desktop home-btn" title="Back to Terminal"></i>
+    <div class="menu-container">
+        <i class="fas fa-bars menu-btn" title="Menu"></i>
+        <div class="menu-dropdown hidden">
+            <a href="#" class="menu-link" data-target="page-about">About me</a>
+            <a href="#" class="menu-link" data-target="page-projects">Projects</a>
+            <a href="#" class="menu-link" data-target="page-blog">Blog</a>
+            <a href="#" class="menu-link" data-target="page-contact">Contact me</a>
+        </div>
+    </div>
+</div>
+    <div class="page-content">
+        <h1>About Me</h1>
+        <p>Coming soon...</p>
+    </div>
+</div>
+<div id="page-projects" class="full-page hidden">
+    <div class="nav-menu">
+    <i class="fas fa-desktop home-btn" title="Back to Terminal"></i>
+    <div class="menu-container">
+        <i class="fas fa-bars menu-btn" title="Menu"></i>
+        <div class="menu-dropdown hidden">
+            <a href="#" class="menu-link" data-target="page-about">About me</a>
+            <a href="#" class="menu-link" data-target="page-projects">Projects</a>
+            <a href="#" class="menu-link" data-target="page-blog">Blog</a>
+            <a href="#" class="menu-link" data-target="page-contact">Contact me</a>
+        </div>
+    </div>
+</div>
+    <div class="page-content">
+        <h1>Projects</h1>
+        <div class="projects-list">
+            
+            <div class="project-item">
+                <h2>My First Project</h2>
+                <p>A cool project I worked on.</p>
+                <a href="/projects/my-first-project/">Read more</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div id="page-blog" class="full-page hidden">
+    <div class="nav-menu">
+    <i class="fas fa-desktop home-btn" title="Back to Terminal"></i>
+    <div class="menu-container">
+        <i class="fas fa-bars menu-btn" title="Menu"></i>
+        <div class="menu-dropdown hidden">
+            <a href="#" class="menu-link" data-target="page-about">About me</a>
+            <a href="#" class="menu-link" data-target="page-projects">Projects</a>
+            <a href="#" class="menu-link" data-target="page-blog">Blog</a>
+            <a href="#" class="menu-link" data-target="page-contact">Contact me</a>
+        </div>
+    </div>
+</div>
+    <div class="page-content">
+        <h1>Blog</h1>
+        <div class="blog-list">
+            
+            
+            
+            
+            
+            <h2 class="blog-year">2023</h2>
+            
+            <div class="blog-item-compact">
+                <span class="blog-date">22 Nov.</span>
+                <a href="/jekyll/update/2023/11/22/welcome.html" class="blog-title">Welcome to my new site!</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div id="page-contact" class="full-page hidden">
+    <div class="nav-menu">
+    <i class="fas fa-desktop home-btn" title="Back to Terminal"></i>
+    <div class="menu-container">
+        <i class="fas fa-bars menu-btn" title="Menu"></i>
+        <div class="menu-dropdown hidden">
+            <a href="#" class="menu-link" data-target="page-about">About me</a>
+            <a href="#" class="menu-link" data-target="page-projects">Projects</a>
+            <a href="#" class="menu-link" data-target="page-blog">Blog</a>
+            <a href="#" class="menu-link" data-target="page-contact">Contact me</a>
+        </div>
+    </div>
+</div>
+    <div class="page-content">
+        <h1>Contact Me</h1>
+        <p>Coming soon...</p>
+    </div>
+</div>
+
+<!-- Menu Overlay (Refactored to dropdowns inside pages, but keeping this if needed for global fallback, though plan said remove) -->
+<!-- Actually, the plan was to remove the global overlay and use the includes which now have the dropdowns. -->
+<!-- The includes (nav.html) have the dropdown structure. -->
+
+    <script src="/assets/js/script.js"></script>
+</body>
+
+</html>
