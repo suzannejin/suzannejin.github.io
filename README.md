@@ -1,6 +1,9 @@
 # Minimalist Terminal Theme
 
 A minimalist, terminal-style Jekyll theme for personal websites and portfolios. It features a typing animation, a command-line interface feel, and a clean, dark aesthetic.
+Check out the [demo](https://suzannejin.github.io/minimalist-terminal-theme/)!
+
+![alt text](/assets/images/screenshot.png)
 
 ## Features
 
