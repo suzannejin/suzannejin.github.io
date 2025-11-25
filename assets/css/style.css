@@ -522,3 +522,36 @@ body.home-page {
         flex: 0 0 auto;
     }
 }
+
+/* Minimalist Projects List */
+.page-content .minimalist-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0;
+    margin-top: 2rem;
+}
+
+.minimalist-list li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.minimalist-list .project-title {
+    font-weight: bold;
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.minimalist-list .project-title:hover {
+    text-decoration: underline;
+}
+
+.minimalist-list .project-separator {
+    margin: 0 8px;
+    color: var(--header-text);
+}
+
+.minimalist-list .project-description {
+    color: var(--text-color);
+}
