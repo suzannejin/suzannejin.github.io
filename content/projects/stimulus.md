@@ -7,7 +7,7 @@ description: "A data-centric deep learning framework for biology"
 
 ## Why Stimulus?
 
-The challenge on building meaningful biological models remain on the data. How to process it, clean it, transform it in meaningful ways. Yet, most ML frameworks focus almost entirely on the modeling stage. They provide training loops, architectures, metrics, and utilities — but leave the data-processing side to ad-hoc scripts, manual pipelines, and scattered notebooks. Without a smooth link from data to model, insights remain trapped. We created stimulus to address that. 
+The challenge on building meaningful biological models remain on the data. How to process it, clean it, transform it in meaningful ways. Yet, most ML frameworks focus almost entirely on the modeling stage. They provide training loops, architectures, metrics, and utilities — but leave the data-processing side to ad-hoc scripts, manual pipelines, and scattered notebooks. Without a smooth link from data to model, insights remain trapped. We created [stimulus](https://github.com/mathysgrapotte/stimulus-py) to address that. 
 
 ## Our solution
 
