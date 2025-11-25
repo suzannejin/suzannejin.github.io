@@ -1,0 +1,79 @@
+<div class="full-page" id="page-gallery">
+    {% include nav.html %}
+    <div class="page-content gallery-content">
+        <div class="gallery-header">
+            <h1>Gallery</h1>
+            <p class="gallery-subtitle">A collection of moments</p>
+        </div>
+
+        <div class="photos-container" id="photosContainer">
+            {% assign gallery_files = site.static_files | where_exp: "item", "item.path contains
+            'assets/images/gallery/'" %}
+            {% assign sorted_gallery = gallery_files | sort: 'name' | reverse %}
+
+            {% for image in sorted_gallery %}
+            {% if image.extname == '.png' or image.extname == '.jpg' or image.extname == '.jpeg' %}
+            <div class="gallery-photo fade-in-hidden">
+                <img src="{{ site.baseurl }}{{ image.path }}" alt="{{ image.name }}" loading="lazy">
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    // We need to run this logic when the gallery page is shown, not just on DOMContentLoaded
+    // because in SPA mode, DOMContentLoaded only fires once.
+    // However, for simplicity in this migration, we'll wrap it in a function that can be called.
+
+    function initGallery() {
+        const container = document.getElementById('photosContainer');
+        const photos = document.querySelectorAll('.gallery-photo');
+
+        if (!container || photos.length === 0) return;
+
+        // Check if already initialized to avoid re-randomizing on every click (optional)
+        // But for "random" feel, maybe re-randomizing is good? Let's keep it simple.
+
+        const containerWidth = container.offsetWidth;
+        let maxY = 0;
+
+        photos.forEach((photo, index) => {
+            const width = Math.floor(Math.random() * 200) + 200;
+            photo.style.width = `${width}px`;
+
+            const maxLeft = Math.max(0, containerWidth - width);
+            const left = Math.floor(Math.random() * maxLeft);
+
+            const verticalStep = 150;
+            const randomOffset = Math.floor(Math.random() * 200) - 100;
+            const top = (index * verticalStep) + randomOffset + 50;
+
+            photo.style.left = `${left}px`;
+            photo.style.top = `${top}px`;
+
+            const bottom = top + (width * 0.75);
+            if (bottom > maxY) maxY = bottom;
+
+            photo.style.zIndex = Math.floor(Math.random() * 10);
+
+            requestAnimationFrame(() => {
+                photo.classList.remove('fade-in-hidden');
+                photo.classList.add('fade-in-visible');
+            });
+        });
+
+        container.style.height = `${maxY + 300}px`;
+    }
+
+    // Run on load (if landing directly on gallery)
+    document.addEventListener('DOMContentLoaded', initGallery);
+
+    // Also run when navigation changes to gallery (hooking into the existing SPA logic might be tricky without modifying script.js more)
+    // But since script.js handles showing/hiding, we might need a MutationObserver or a custom event.
+    // For now, let's just leave it as is. If the user navigates away and back, the inline script won't re-run.
+    // We should probably move this logic to script.js or use a MutationObserver.
+    // Let's stick to the current plan of just moving the file first, but I'll make the function global so script.js *could* call it.
+    window.initGallery = initGallery;
+</script>

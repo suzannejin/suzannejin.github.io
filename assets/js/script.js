@@ -200,8 +200,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     links.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
             const targetId = link.getAttribute('data-target');
+            if (!targetId) return; // Allow normal links to work
+
+            e.preventDefault();
             const hash = targetId.replace('page-', '');
             history.pushState({
                 page: targetId
@@ -251,6 +253,8 @@ document.addEventListener('DOMContentLoaded', () => {
     menuLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             const targetId = link.getAttribute('data-target');
+            if (!targetId) return; // Allow normal links to work
+
             const targetElement = document.getElementById(targetId);
 
             if (targetElement) {

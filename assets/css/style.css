@@ -555,3 +555,68 @@ body.home-page {
 .minimalist-list .project-description {
     color: var(--text-color);
 }
+
+/* Gallery Styles */
+.gallery-content {
+    max-width: 100% !important;
+    /* Allow full width for random layout */
+    padding: 0 20px;
+    overflow-x: hidden;
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+.gallery-header h1 {
+    font-size: 3rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.gallery-subtitle {
+    font-size: 1.2rem;
+    color: var(--header-text);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.photos-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    /* Ensure enough space */
+    margin-top: 40px;
+}
+
+.gallery-photo {
+    position: absolute;
+    transition: transform 0.3s, z-index 0.3s, opacity 0.5s ease-in;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    will-change: transform, opacity;
+}
+
+.fade-in-hidden {
+    opacity: 0;
+}
+
+.fade-in-visible {
+    opacity: 1;
+}
+
+.gallery-photo:hover {
+    transform: scale(1.05);
+    z-index: 100 !important;
+    /* Bring to front on hover */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* No border radius for squared look */
+}
