@@ -1,0 +1,16 @@
+<div id="page-blog" class="full-page hidden">
+    {{ partial "nav.html" . }}
+    <div class="page-content">
+        <h1>Blog</h1>
+        <div class="blog-list">
+            {{ range where site.RegularPages "Section" "posts" }}
+            <div class="blog-item-compact">
+                <span class="blog-date">{{ .Date.Format "2006-01-02" }}</span>
+                <a href="{{ .RelPermalink }}" class="blog-title">{{ .Title }}</a>
+            </div>
+            {{ else }}
+            <p>Coming soon...</p>
+            {{ end }}
+        </div>
+    </div>
+</div>

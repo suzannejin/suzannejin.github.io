@@ -1,0 +1,28 @@
+<div class="full-page hidden" id="page-gallery">
+    {{ partial "nav.html" . }}
+    <div class="page-content gallery-content">
+        <div class="gallery-header">
+            <h1>Gallery</h1>
+            <p class="gallery-subtitle">A collection of moments</p>
+        </div>
+
+        <div class="photos-container" id="photosContainer">
+            {{ $images := resources.Match "images/gallery/*" }}
+            {{ range $images }}
+            {{ if or (eq .MediaType.SubType "jpeg") (eq .MediaType.SubType "png") }}
+            {{ $thumb := .Resize "400x" }}
+            <div class="gallery-photo fade-in-hidden">
+                <img src="{{ $thumb.RelPermalink }}" data-full="{{ .RelPermalink }}" alt="{{ .Name | path.Base }}"
+                    loading="lazy">
+            </div>
+            {{ end }}
+            {{ end }}
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="lightbox-modal">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightboxImage">
+    </div>
+</div>

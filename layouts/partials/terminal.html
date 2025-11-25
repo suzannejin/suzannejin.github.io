@@ -5,47 +5,47 @@
             <span class="minimize"></span>
             <span class="maximize"></span>
         </div>
-        <div class="title">{{ site.username }} — -zsh — 80x24</div>
+        <div class="title">{{ .Site.Params.username }} — -zsh — 80x24</div>
     </div>
     <div class="terminal-body">
         <div class="command-line" id="line1">
-            <span class="prompt">{{ site.username }} ~ %</span> <span class="command" id="cmd1"></span><span
+            <span class="prompt">{{ .Site.Params.username }} ~ %</span> <span class="command" id="cmd1"></span><span
                 class="cursor" id="cursor1"></span>
         </div>
         <div class="output hidden" id="output1">
-            <p>{{ site.intro_text }}</p>
+            <p>{{ .Site.Params.intro_text }}</p>
         </div>
 
         <div class="command-line hidden" id="line2">
-            <span class="prompt">{{ site.username }} ~ %</span> <span class="command" id="cmd2"></span><span
+            <span class="prompt">{{ .Site.Params.username }} ~ %</span> <span class="command" id="cmd2"></span><span
                 class="cursor" id="cursor2"></span>
         </div>
         <div class="output links-grid hidden" id="output2">
-            {% if site.links.github %}
-            <a href="{{ site.links.github }}" target="_blank" class="link-item">
+            {{ if .Site.Params.links.github }}
+            <a href="{{ .Site.Params.links.github }}" target="_blank" class="link-item">
                 <i class="fab fa-github"></i> GitHub
             </a>
-            {% endif %}
-            {% if site.links.linkedin %}
-            <a href="{{ site.links.linkedin }}" target="_blank" class="link-item">
+            {{ end }}
+            {{ if .Site.Params.links.linkedin }}
+            <a href="{{ .Site.Params.links.linkedin }}" target="_blank" class="link-item">
                 <i class="fab fa-linkedin"></i> LinkedIn
             </a>
-            {% endif %}
-            {% if site.links.x %}
-            <a href="{{ site.links.x }}" target="_blank" class="link-item">
+            {{ end }}
+            {{ if .Site.Params.links.x }}
+            <a href="{{ .Site.Params.links.x }}" target="_blank" class="link-item">
                 <i class="fab fa-twitter"></i> X
             </a>
-            {% endif %}
-            {% if site.links.scholar %}
-            <a href="{{ site.links.scholar }}" target="_blank" class="link-item">
+            {{ end }}
+            {{ if .Site.Params.links.scholar }}
+            <a href="{{ .Site.Params.links.scholar }}" target="_blank" class="link-item">
                 <i class="fas fa-graduation-cap"></i> Google Scholar
             </a>
-            {% endif %}
+            {{ end }}
 
         </div>
 
         <div class="command-line hidden" id="line3">
-            <span class="prompt">{{ site.username }} ~ %</span> <span class="command" id="cmd3"></span><span
+            <span class="prompt">{{ .Site.Params.username }} ~ %</span> <span class="command" id="cmd3"></span><span
                 class="cursor" id="cursor3"></span>
         </div>
         <div class="output links-grid hidden" id="output3">
@@ -67,19 +67,19 @@
         </div>
 
         <div class="command-line hidden" id="line4">
-            <span class="prompt">{{ site.username }} ~ %</span> <span class="command" id="cmd4"></span><span
+            <span class="prompt">{{ .Site.Params.username }} ~ %</span> <span class="command" id="cmd4"></span><span
                 class="cursor" id="cursor4"></span>
         </div>
         <div class="output links-grid hidden" id="output4">
-            {% if site.links.cv %}
-            <a href="{{ site.links.cv }}" class="link-item">
+            {{ if .Site.Params.links.cv }}
+            <a href="{{ .Site.Params.links.cv }}" class="link-item">
                 <i class="fas fa-file-alt"></i> CV
             </a>
-            {% endif %}
+            {{ end }}
         </div>
 
         <div class="command-line hidden" id="line5">
-            <span class="prompt">{{ site.username }} ~ %</span> <span class="cursor" id="cursor5"></span>
+            <span class="prompt">{{ .Site.Params.username }} ~ %</span> <span class="cursor" id="cursor5"></span>
         </div>
     </div>
 </div>

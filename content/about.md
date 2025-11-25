@@ -1,3 +1,7 @@
+---
+title: "About Me"
+layout: "about"
+---
 # Hi!👋 This is Suzanne.
 
 Some content about me...
@@ -27,6 +31,5 @@ g<br />
 h<br />
 i<br />
 a<br />
-
 
 <p align="right">Written by Gemini</p>

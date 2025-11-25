@@ -171,6 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
         pages.forEach(page => {
             if (page.id === pageId) {
                 page.classList.remove('hidden');
+                if (pageId === 'page-gallery') {
+                    setTimeout(initGallery, 100);
+                }
             } else {
                 page.classList.add('hidden');
             }
@@ -292,4 +295,86 @@ document.addEventListener('DOMContentLoaded', () => {
     if (terminalContainer && typeof handleHashChange === 'function') {
         handleHashChange();
     }
+
+    // Gallery Logic
+    function initGallery() {
+        const container = document.getElementById('photosContainer');
+        const photos = document.querySelectorAll('.gallery-photo');
+        const modal = document.getElementById('lightboxModal');
+        const modalImg = document.getElementById('lightboxImage');
+        const closeBtn = document.querySelector('.lightbox-close');
+
+        if (!container || photos.length === 0) return;
+
+        const containerWidth = container.offsetWidth;
+        let maxY = 0;
+
+        photos.forEach((photo, index) => {
+            // Layout Logic
+            const width = Math.floor(Math.random() * 200) + 200;
+            photo.style.width = `${width}px`;
+
+            const maxLeft = Math.max(0, containerWidth - width);
+            const left = Math.floor(Math.random() * maxLeft);
+
+            const verticalStep = 150;
+            const randomOffset = Math.floor(Math.random() * 200) - 100;
+            const top = (index * verticalStep) + randomOffset + 50;
+
+            photo.style.left = `${left}px`;
+            photo.style.top = `${top}px`;
+
+            const bottom = top + (width * 0.75);
+            if (bottom > maxY) maxY = bottom;
+
+            photo.style.zIndex = Math.floor(Math.random() * 10);
+
+            requestAnimationFrame(() => {
+                photo.classList.remove('fade-in-hidden');
+                photo.classList.add('fade-in-visible');
+            });
+
+            // Click to open lightbox
+            photo.onclick = function () {
+                modal.style.display = "flex";
+                const img = this.querySelector('img');
+                modalImg.src = img.dataset.full || img.src;
+            }
+        });
+
+        container.style.height = `${maxY + 300}px`;
+
+        // Lightbox Close Logic
+        if (closeBtn) {
+            closeBtn.onclick = function () {
+                modal.style.display = "none";
+            }
+        }
+
+        if (modal) {
+            modal.onclick = function (e) {
+                if (e.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+    }
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    window.addEventListener('resize', debounce(() => {
+        if (document.getElementById('page-gallery') && !document.getElementById('page-gallery').classList.contains('hidden')) {
+            initGallery();
+        }
+    }, 250));
 });

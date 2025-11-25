@@ -1,0 +1,10 @@
+{{ $contact := site.GetPage "contact.md" }}
+<div id="page-contact" class="full-page hidden">
+    {{ partial "nav.html" . }}
+    <div class="page-content">
+        <h1>{{ $contact.Title }}</h1>
+        <div class="contact-content">
+            {{ $contact.Content }}
+        </div>
+    </div>
+</div>

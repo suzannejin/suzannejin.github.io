@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ site.title }}</title>
+    <title>{{ .Site.Title }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/syntax.css" | relURL }}">
 </head>
 
-<body{% if page.url=='/' or page.url=='/index.html' %} class="home-page" {% endif %}>
+<body{{ if .IsHome }} class="home-page" {{ end }}>
     <button id="theme-toggle" class="theme-btn" title="Toggle Theme">
         <i class="fas fa-moon"></i>
     </button>
 
-    {{ content }}
+    {{ block "main" . }}{{ end }}
 
-    <script src="{{ '/assets/js/script.js' | relative_url }}"></script>
+    <script src="{{ "js/script.js" | relURL }}"></script>
     </body>
 
 </html>

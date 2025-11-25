@@ -1,18 +1,18 @@
 <div id="page-projects" class="full-page hidden">
-    {% include nav.html %}
+    {{ partial "nav.html" . }}
     <div class="page-content">
         <h1>Projects</h1>
         <div class="projects-list">
             <ul class="minimalist-list">
-                {% for project in site.projects %}
+                {{ range where site.RegularPages "Section" "projects" }}
                 <li>
-                    <a href="{{ project.url | relative_url }}" class="project-title">{{ project.title }}</a>
+                    <a href="{{ .RelPermalink }}" class="project-title">{{ .Title }}</a>
                     <span class="project-separator">-</span>
-                    <span class="project-description">{{ project.description }}</span>
+                    <span class="project-description">{{ .Params.description }}</span>
                 </li>
-                {% else %}
+                {{ else }}
                 <li>Coming soon...</li>
-                {% endfor %}
+                {{ end }}
             </ul>
         </div>
     </div>
