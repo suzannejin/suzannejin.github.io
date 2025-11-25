@@ -10,7 +10,10 @@
             {{ $images := resources.Match "images/gallery/*" }}
             {{ range $images }}
             {{ if or (eq .MediaType.SubType "jpeg") (eq .MediaType.SubType "png") }}
-            {{ $thumb := .Resize "400x" }}
+            {{ $thumb := .Resize "1200x" }}
+            {{ if in .Name "mirrored_horizons" }}
+            {{ $thumb = . }}
+            {{ end }}
             <div class="gallery-photo fade-in-hidden">
                 <img src="{{ $thumb.RelPermalink }}" data-full="{{ .RelPermalink }}" alt="{{ .Name | path.Base }}"
                     loading="lazy">

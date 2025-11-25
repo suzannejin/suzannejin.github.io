@@ -311,15 +311,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         photos.forEach((photo, index) => {
             // Layout Logic
-            const width = Math.floor(Math.random() * 200) + 200;
+            const width = Math.floor(Math.random() * 200) + 300;
+            const height = 400; // Fixed height for consistent overlap
             photo.style.width = `${width}px`;
+            photo.style.height = `${height}px`;
 
             const maxLeft = Math.max(0, containerWidth - width);
             const left = Math.floor(Math.random() * maxLeft);
 
-            const verticalStep = 150;
-            const randomOffset = Math.floor(Math.random() * 200) - 100;
-            const top = (index * verticalStep) + randomOffset + 50;
+            // 15% overlap means we move down by 85% of height
+            const overlapFactor = 0.85;
+            const top = index * (height * overlapFactor) + 50;
 
             photo.style.left = `${left}px`;
             photo.style.top = `${top}px`;
