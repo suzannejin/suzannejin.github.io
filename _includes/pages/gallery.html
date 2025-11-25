@@ -20,26 +20,29 @@
             {% endfor %}
         </div>
     </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="lightbox-modal">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightboxImage">
+    </div>
 </div>
 
 <script>
-    // We need to run this logic when the gallery page is shown, not just on DOMContentLoaded
-    // because in SPA mode, DOMContentLoaded only fires once.
-    // However, for simplicity in this migration, we'll wrap it in a function that can be called.
-
     function initGallery() {
         const container = document.getElementById('photosContainer');
         const photos = document.querySelectorAll('.gallery-photo');
+        const modal = document.getElementById('lightboxModal');
+        const modalImg = document.getElementById('lightboxImage');
+        const closeBtn = document.querySelector('.lightbox-close');
 
         if (!container || photos.length === 0) return;
-
-        // Check if already initialized to avoid re-randomizing on every click (optional)
-        // But for "random" feel, maybe re-randomizing is good? Let's keep it simple.
 
         const containerWidth = container.offsetWidth;
         let maxY = 0;
 
         photos.forEach((photo, index) => {
+            // Layout Logic
             const width = Math.floor(Math.random() * 200) + 200;
             photo.style.width = `${width}px`;
 
@@ -62,18 +65,55 @@
                 photo.classList.remove('fade-in-hidden');
                 photo.classList.add('fade-in-visible');
             });
+
+            // Click to open lightbox
+            photo.onclick = function () {
+                modal.style.display = "flex";
+                modalImg.src = this.querySelector('img').src;
+            }
         });
 
         container.style.height = `${maxY + 300}px`;
+
+        // Lightbox Close Logic
+        if (closeBtn) {
+            closeBtn.onclick = function () {
+                modal.style.display = "none";
+            }
+        }
+
+        if (modal) {
+            modal.onclick = function (e) {
+                if (e.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
     }
 
-    // Run on load (if landing directly on gallery)
+    // Debounce function for resize
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // Run on load
     document.addEventListener('DOMContentLoaded', initGallery);
 
-    // Also run when navigation changes to gallery (hooking into the existing SPA logic might be tricky without modifying script.js more)
-    // But since script.js handles showing/hiding, we might need a MutationObserver or a custom event.
-    // For now, let's just leave it as is. If the user navigates away and back, the inline script won't re-run.
-    // We should probably move this logic to script.js or use a MutationObserver.
-    // Let's stick to the current plan of just moving the file first, but I'll make the function global so script.js *could* call it.
+    // Handle Resize
+    window.addEventListener('resize', debounce(() => {
+        // Only re-init if we are on the gallery page
+        if (document.getElementById('page-gallery') && !document.getElementById('page-gallery').classList.contains('hidden')) {
+            initGallery();
+        }
+    }, 250));
+
     window.initGallery = initGallery;
 </script>
