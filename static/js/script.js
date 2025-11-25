@@ -307,27 +307,56 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!container || photos.length === 0) return;
 
         const containerWidth = container.offsetWidth;
-        let maxY = 0;
+
+        // Diagonal Cascade Configuration
+        let currentX = 20; // Start with some left padding
+        let currentY = 50; // Start with some top padding
 
         photos.forEach((photo, index) => {
-            // Layout Logic
+            // Random dimensions
             const width = Math.floor(Math.random() * 200) + 300;
-            const height = 400; // Fixed height for consistent overlap
+            const height = 400; // Fixed height
+
             photo.style.width = `${width}px`;
             photo.style.height = `${height}px`;
 
-            const maxLeft = Math.max(0, containerWidth - width);
-            const left = Math.floor(Math.random() * maxLeft);
+            // Check Bounds (Wrap) BEFORE placing
+            // If the current position + width exceeds container width, wrap to left
+            if (currentX + width > containerWidth) {
+                currentX = Math.floor(Math.random() * 50) + 20; // Reset to left with slight random
+                currentY += 150; // Move down when wrapping
+            }
 
-            // 15% overlap means we move down by 85% of height
-            const overlapFactor = 0.85;
-            const top = index * (height * overlapFactor) + 50;
+            // Apply Position
+            photo.style.left = `${currentX}px`;
+            photo.style.top = `${currentY}px`;
 
-            photo.style.left = `${left}px`;
-            photo.style.top = `${top}px`;
+            // Calculate Step for NEXT photo
 
-            const bottom = top + (width * 0.75);
-            if (bottom > maxY) maxY = bottom;
+            // Horizontal Step: User Request
+            // Starting point X of the next photo can fluctuate randomly
+            // between half and ending point of X of the previous photo
+            const minStepX = width / 2;
+            const maxStepX = width;
+            const stepX = Math.floor(Math.random() * (maxStepX - minStepX)) + minStepX;
+
+            // Vertical Step: Restore previous rules
+            // Probabilistic Overlap: 50% chance to overlap vertically
+            const overlapChance = Math.random();
+            let stepY;
+
+            if (overlapChance > 0.5) {
+                // Overlap: We want the NEXT photo to start such that it overlaps THIS photo vertically by 5-20%
+                // This means we move DOWN by (height - overlap)
+                const overlapFractionY = (Math.random() * 0.15) + 0.05; // 0.05 to 0.20
+                stepY = height - (height * overlapFractionY);
+            } else {
+                // No Overlap: Move down significantly
+                stepY = height * 0.5; // Move down by half height (cascading down)
+            }
+
+            currentX += stepX;
+            currentY += stepY;
 
             photo.style.zIndex = Math.floor(Math.random() * 10);
 
@@ -344,7 +373,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        container.style.height = `${maxY + 300}px`;
+        // Set container height
+        // Add last image height + padding
+        container.style.height = `${currentY + 600}px`;
 
         // Lightbox Close Logic
         if (closeBtn) {
