@@ -16,8 +16,8 @@ Here is some more detailed text. You can use **bold** or *italic* text to emphas
 
 You can embed images using standard Markdown syntax. Here is an example of a figure:
 
-![Placeholder Cat]({{ '/assets/images/cat.png' | relative_url }}){: width="300px"}<br />
-*Figure 1: This is a caption for the figure.*
+<img src="/images/cat.png" alt="Placeholder Cat" width="300px">
+<br \>Figure 1: This is a caption for the figure.
 
 ## Code Example
 
